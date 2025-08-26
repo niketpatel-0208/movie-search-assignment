@@ -9,21 +9,63 @@ This is my solution for the semantic search on movie plots assignment. I impleme
 
 ## Setup
 
-1. Clone: `git clone https://github.com/niketpatel-0208/movie-search-assignment.git`
-2. Navigate: `cd movie-search-assignment/Assignment-1`
-3. Create virtual environment: `python -m venv venv` and activate it:
-   - macOS/Linux: `source venv/bin/activate`
-   - Windows: `venv\Scripts\activate`
-4. Install dependencies: `pip install -r requirements.txt`
-5. Run notebook: `jupyter notebook movie_search_solution.ipynb`
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/niketpatel-0208/movie-search-assignment.git
+   ```
+
+2. **Navigate to the project:**
+   ```bash
+   cd movie-search-assignment/Assignment-1
+   ```
+
+3. **Create and activate virtual environment:**
+   ```bash
+   python -m venv venv
+   ```
+   
+   **Activate it:**
+   - macOS/Linux:
+     ```bash
+     source venv/bin/activate
+     ```
+   - Windows:
+     ```bash
+     venv\Scripts\activate
+     ```
+
+4. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Run Jupyter notebook:**
+   ```bash
+   jupyter notebook movie_search_solution.ipynb
+   ```
 
 *Keep the virtual environment activated for all subsequent commands.*
 
 ## Testing
 
-Run: `python -m unittest tests/test_movie_search.py -v`
+Run the unit tests to verify everything works correctly:
 
-*Note: Make sure your virtual environment is activated before running tests.*
+```bash
+python -m unittest tests/test_movie_search.py -v
+```
+
+**Expected output:**
+```
+test_search_movies_output_format ... ok
+test_search_movies_relevance ... ok  
+test_search_movies_similarity_range ... ok
+test_search_movies_top_n ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in X.XXXs
+
+OK
+```
 
 All 4 tests should pass:
 - Output format verification
@@ -31,23 +73,93 @@ All 4 tests should pass:
 - Similarity score range (0-1)
 - Semantic relevance of results
 
+*Note: Make sure your virtual environment is activated before running tests.*
+
 ## Usage
 
-Test the function: `search_movies('spy thriller in Paris')`
+The `search_movies()` function allows you to search for movies using natural language queries. Here's how to use it:
 
-Example:
+### Function Signature
 ```python
-from movie_search import search_movies
+search_movies(query, top_n=5)
+```
 
-# Basic search
-result = search_movies('spy thriller in Paris', top_n=3)
+**Parameters:**
+- `query` (str): Natural language description of the movie you're looking for
+- `top_n` (int, optional): Number of results to return (default: 5)
+
+**Returns:**
+- `pandas.DataFrame`: Results with columns `['title', 'plot', 'similarity']`
+
+### Basic Usage
+
+1. **Start Python in your activated virtual environment:**
+   ```bash
+   python
+   ```
+
+2. **Import and use the function:**
+   ```python
+   from movie_search import search_movies
+
+   # Search for spy thrillers
+   result = search_movies('spy thriller in Paris')
+   print(result)
+   ```
+
+3. **Expected output:**
+   ```
+              title                                               plot  similarity
+   0         Spy Movie  A spy navigates intrigue in Paris to stop a te...    0.769684
+   1  Romance in Paris  A couple falls in love in Paris under romantic...    0.388030
+   2      Action Flick  A high-octane chase through New York with expl...    0.256777
+   ```
+
+### Advanced Usage Examples
+
+**Limit number of results:**
+```python
+# Get only top 2 results
+result = search_movies('spy thriller in Paris', top_n=2)
+print(f"Found {len(result)} movies")
 print(result)
+```
 
-# Expected output:
-#         title                                               plot  similarity
-#     Spy Movie  A spy navigates intrigue in Paris to stop a te...    0.769684
-# Romance in Paris  A couple falls in love in Paris under romantic...    0.388030
-#  Action Flick  A high-octane chase through New York with expl...    0.256777
+**Different types of queries:**
+```python
+# Romance movies
+romance_results = search_movies('romantic love story')
+print("Romance movies:")
+print(romance_results[['title', 'similarity']])
+
+# Action movies
+action_results = search_movies('action adventure with explosions')
+print("\nAction movies:")
+print(action_results[['title', 'similarity']])
+
+# Location-based search
+paris_results = search_movies('movie set in Paris')
+print("\nParis movies:")
+print(paris_results[['title', 'similarity']])
+```
+
+**Working with results:**
+```python
+result = search_movies('spy thriller in Paris', top_n=3)
+
+# Get the best match
+best_match = result.iloc[0]
+print(f"Best match: {best_match['title']} (similarity: {best_match['similarity']:.4f})")
+
+# Filter by similarity threshold
+high_similarity = result[result['similarity'] > 0.5]
+print(f"High similarity matches: {len(high_similarity)}")
+```
+
+### Quick Test Command
+For a quick test without entering Python interactive mode:
+```bash
+python -c "from movie_search import search_movies; print(search_movies('spy thriller in Paris', top_n=2))"
 ```
 
 The function returns a pandas DataFrame with columns: `title`, `plot`, and `similarity` (sorted by similarity score).
@@ -56,13 +168,32 @@ The function returns a pandas DataFrame with columns: `title`, `plot`, and `simi
 
 When you're done working with the project:
 
-```bash
-deactivate  # Exit the virtual environment
-```
+1. **Stop Jupyter Notebook (if running):**
+   - In the terminal where Jupyter is running: Press `Ctrl+C` twice
+   - Or close the browser tab and use `Ctrl+C` in terminal
+
+2. **Exit Python interactive mode (if in Python shell):**
+   ```bash
+   exit()
+   ```
+
+3. **Deactivate virtual environment:**
+   ```bash
+   deactivate
+   ```
+
+### Restarting Later
 
 You can reactivate the environment anytime with:
+
+**Activate virtual environment:**
 ```bash
 source venv/bin/activate  # macOS/Linux
 # or
 venv\Scripts\activate     # Windows
+```
+
+**Start Jupyter again:**
+```bash
+jupyter notebook movie_search_solution.ipynb
 ```

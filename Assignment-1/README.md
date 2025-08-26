@@ -55,19 +55,20 @@ python -m unittest tests/test_movie_search.py -v
 ```
 
 **Actual test output:**
-    test_search_movies_output_format (tests.test_movie_search.TestMovieSearch.test_search_movies_output_format)
-    Test if search_movies returns a DataFrame with correct columns. ... ok
-    test_search_movies_relevance (tests.test_movie_search.TestMovieSearch.test_search_movies_relevance)
-    Test if returned movies are relevant to the query. ... ok
-    test_search_movies_similarity_range (tests.test_movie_search.TestMovieSearch.test_search_movies_similarity_range)
-    Test if similarity scores are between 0 and 1. ... ok
-    test_search_movies_top_n (tests.test_movie_search.TestMovieSearch.test_search_movies_top_n)
-    Test if search_movies returns the correct number of results. ... ok
 
-    ----------------------------------------------------------------------
-    Ran 4 tests in 3.781s
-
-    OK
+`test_search_movies_output_format (tests.test_movie_search.TestMovieSearch.test_search_movies_output_format)`  
+`Test if search_movies returns a DataFrame with correct columns. ... ok`  
+`test_search_movies_relevance (tests.test_movie_search.TestMovieSearch.test_search_movies_relevance)`  
+`Test if returned movies are relevant to the query. ... ok`  
+`test_search_movies_similarity_range (tests.test_movie_search.TestMovieSearch.test_search_movies_similarity_range)`  
+`Test if similarity scores are between 0 and 1. ... ok`  
+`test_search_movies_top_n (tests.test_movie_search.TestMovieSearch.test_search_movies_top_n)`  
+`Test if search_movies returns the correct number of results. ... ok`  
+  
+`----------------------------------------------------------------------`  
+`Ran 4 tests in 3.781s`  
+  
+`OK`
 
 All 4 tests should pass:
 - Output format verification
@@ -82,7 +83,8 @@ All 4 tests should pass:
 The `search_movies()` function allows you to search for movies using natural language queries.
 
 ### Function Signature
-    search_movies(query, top_n=5)
+
+`search_movies(query, top_n=5)`
 
 **Parameters:**
 - `query` (str): Natural language description of the movie you're looking for  
@@ -97,9 +99,10 @@ python -c "from movie_search import search_movies; print(search_movies('spy thri
 ```
 
 **Output:**
-                  title                                               plot  similarity
-    0         Spy Movie  A spy navigates intrigue in Paris to stop a te...    0.769684
-    1  Romance in Paris  A couple falls in love in Paris under romantic...    0.388030
+
+`              title                                               plot  similarity`  
+`0         Spy Movie  A spy navigates intrigue in Paris to stop a te...    0.769684`  
+`1  Romance in Paris  A couple falls in love in Paris under romantic...    0.388030`
 
 ### Comprehensive Examples
 
@@ -116,45 +119,46 @@ This will demonstrate:
 - Advanced result manipulation
 
 **Sample output from usage examples:**
-    ============================================================
-    Movie Semantic Search - Usage Examples
-    ============================================================
 
-    1. Basic Search - 'spy thriller in Paris'
-    ----------------------------------------
-                  title                                               plot  similarity
-    0         Spy Movie  A spy navigates intrigue in Paris to stop a te...    0.769684
-    1  Romance in Paris  A couple falls in love in Paris under romantic...    0.388030
-    2      Action Flick  A high-octane chase through New York with expl...    0.256777
-
-    2. Limited Results - top 2 movies
-    ----------------------------------------
-                  title                                               plot  similarity
-    0         Spy Movie  A spy navigates intrigue in Paris to stop a te...    0.769684
-    1  Romance in Paris  A couple falls in love in Paris under romantic...    0.388030
-
-    3. Romance Movies
-    ----------------------------------------
-                  title  similarity
-    0  Romance in Paris    0.553853
-    1      Action Flick    0.143565
-
-    4. Action Movies
-    ----------------------------------------
-              title  similarity
-    0  Action Flick    0.544479
-    1     Spy Movie    0.212702
-
-    5. Working with Results
-    ----------------------------------------
-    Best match: Spy Movie (similarity: 0.7697)
-    High similarity matches: 1 movies
-           title  similarity
-    0  Spy Movie    0.769684
-
-    ============================================================
-    Usage examples completed!
-    ============================================================
+`============================================================`  
+`Movie Semantic Search - Usage Examples`  
+`============================================================`  
+  
+`1. Basic Search - 'spy thriller in Paris'`  
+`----------------------------------------`  
+`              title                                               plot  similarity`  
+`0         Spy Movie  A spy navigates intrigue in Paris to stop a te...    0.769684`  
+`1  Romance in Paris  A couple falls in love in Paris under romantic...    0.388030`  
+`2      Action Flick  A high-octane chase through New York with expl...    0.256777`  
+  
+`2. Limited Results - top 2 movies`  
+`----------------------------------------`  
+`              title                                               plot  similarity`  
+`0         Spy Movie  A spy navigates intrigue in Paris to stop a te...    0.769684`  
+`1  Romance in Paris  A couple falls in love in Paris under romantic...    0.388030`  
+  
+`3. Romance Movies`  
+`----------------------------------------`  
+`              title  similarity`  
+`0  Romance in Paris    0.553853`  
+`1      Action Flick    0.143565`  
+  
+`4. Action Movies`  
+`----------------------------------------`  
+`          title  similarity`  
+`0  Action Flick    0.544479`  
+`1     Spy Movie    0.212702`  
+  
+`5. Working with Results`  
+`----------------------------------------`  
+`Best match: Spy Movie (similarity: 0.7697)`  
+`High similarity matches: 1 movies`  
+`       title  similarity`  
+`0  Spy Movie    0.769684`  
+  
+`============================================================`  
+`Usage examples completed!`  
+`============================================================`
 
 The function returns a pandas DataFrame with columns: `title`, `plot`, and `similarity` (sorted by similarity score).
 
